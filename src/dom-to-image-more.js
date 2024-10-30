@@ -24,6 +24,7 @@ const defaultOptions = {
     corsImg: undefined,
     // Callback for adjustClonedNode eventing (to allow adjusting clone's properties)
     adjustClonedNode: undefined,
+    //hxy
     onMakeNodeCopy: undefined,
 };
 
@@ -347,7 +348,6 @@ function draw(domNode, options) {
 let sandbox = null;
 
 function cloneNode(node, options, parentComputedStyles, ownerWindow) {
-    console.log('Log-- node', node);
     const filter = options.filter;
     if (
         node === sandbox ||
@@ -372,13 +372,10 @@ function cloneNode(node, options, parentComputedStyles, ownerWindow) {
 
     async function makeNodeCopy(original) {
 
-
-        console.log('Log-- options', options);
         const res = await options.onMakeNodeCopy?.(original)
         if (res) return res
 
         if (util.isHTMLCanvasElement(original)) {
-            console.log('Log-- original', original);
             return util.makeImage(original.toDataURL());
         }
         return original.cloneNode(false);
@@ -780,7 +777,6 @@ function newUtil() {
     }
 
     function makeImage(uri) {
-        console.log('Log-- uri', uri);
         if (uri === 'data:,') {
             return Promise.resolve();
         }
@@ -1185,7 +1181,6 @@ function newImages() {
     };
 
     function newImage(element) {
-        console.log('Log-- element', element);
         return {
             inline: inline,
         };
